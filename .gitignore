@@ -1,0 +1,15 @@
+*~
+*.old
+*.bak
+*.swp
+*.BAK
+*.orig
+*.rej
+*.log
+*.[ao]
+*.so
+*.[gx]z
+core
+core.*
+.npmrc
+node_modules

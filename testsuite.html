@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <script src="remixml.js"></script>
+  <script src="remixml-forms.js"></script>
+  <title>Test suite for Remixml-forms</title>
+ </head>
+ <body>
+  <h1>Test suite for <a href="//remixml.org/">Remixml-forms</a></h1>
+  <p id="log">
+  </p>
+  <script id="self">
+   "use strict";
+   var t = document.getElementById("self");
+   t.parentNode.removeChild(t);		// Take ourself out of the equation
+   var logid = document.getElementById("log");
+   var curpage = document.head.parentNode;
+   var oldhtml = curpage.innerHTML;
+   var newdoc = Remixml.parse(curpage);
+   var errors = 0, res;
+   function log(x) { logid.innerHTML += x + "<br />"; }
+   function error(x) { log("<strong>ERROR:<strong> " + x); errors++; }
+   function htmlmap(s) {
+     return "&" + {"<":"lt",">":"gt","&":"amp","'":"apos",'"':"quot"}[s] + ";";
+   }
+   function escape(j) {
+     return j.replace(/[<>&'"]/g, htmlmap);
+   }
+   function runtest(x, y) {
+     if (x != y) {
+       error("Mismatch <br /><code>" + escape(x) +
+        "</code> (" + x.length + ") !=<br /><code>" +
+        escape(y) + "</code> (" + y.length + ")");
+     }
+     else
+       log("Found " + x.length + " == " + y.length);
+   }
+
+   if (errors)
+     error("Found " + errors + " errors");
+   else
+     log("SUCCESS: All checks passed.");
+  </script>
+ </body>
+</html>

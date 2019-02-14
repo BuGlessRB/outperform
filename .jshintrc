@@ -1,0 +1,18 @@
+{
+  "browser": true,
+  "predef": ["define", "require", "global"],
+  "moz": true,
+  "maxerr": 100,
+  "futurehostile": true,
+  "latedef": true,
+  "noarg": true,
+  "nonbsp": true,
+  "strict": true,
+  "undef": true,
+  "unused": true,
+  "loopfunc": true,
+  "evil": true,
+  "expr": true,
+  "laxbreak": true,
+  "boss": true
+}
