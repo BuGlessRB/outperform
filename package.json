@@ -1,21 +1,20 @@
 {
-  "name": "remixml-forms",
-  "version": "1.0.0",
-  "description": "Form generator using Remixml templates",
-  "main": "remixml-forms.js",
-  "browser": "remixml-forms.js",
-  "homepage": "https://remixml.org/",
+  "name": "outperform",
+  "version": "1.0.17",
+  "description": "Form generator using plain javascript",
+  "main": "outperform.js",
+  "browser": "outperform.js",
   "scripts": {
     "test": "# Can only be tested inside a browser environment."
   },
-  "dependencies": { "remixml":"*" },
+  "dependencies": { },
   "devDependencies": {},
   "directories": {},
   "repository": {
-    "type": "git", "url": "git://github.com/BuGlessRB/remixml-forms"
+    "type": "git", "url": "git://github.com/BuGlessRB/outperform"
   },
   "keywords": [
-    "RXML", "XML", "HTML", "Roxen", "template", "macro", "language"
+    "HTML", "template", "form", "form-generator"
   ],
   "author": "Stephen R. van den Berg <srb@cuci.nl>",
   "license": "(ISC OR GPL-3.0)"

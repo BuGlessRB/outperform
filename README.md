@@ -1,6 +1,6 @@
-<h1>Remixml-forms</h1>
+<h1>Outperform</h1>
 
-Remixml-forms is a form generator using Remixml.
+Outperform is a form generator written in plain Javascript.
 
 ## Requirements
 
@@ -9,32 +9,17 @@ It runs inside any webbrowser environment (starting at IE11 and up).
 ## Basic usage
 
 ```js
- {
- {_: {
-    sitename: "foo.bar",
-    description: "faster than lightning templates"
-  },
-    whatever: 7
-  }
- });
+ var fields = [
+   [ "houseno", "number", "This is the description", {min:1, max:999}],
+   [ "foo", "text", "This is the description"],
+   [ "foo2", "password", "This is the description"],
+ ];
+ var form = forms.create("form", {id:"hello"}, fields);
+ document.body.appendChild(form);
 ```
 
 ## Reference documentation
 
-### Full entity syntax
-
-### Examples
-
-Simple assigment:
-
-```html
-<set var="_.variablename">the new value</set>
-```
-
 ### API
 
 ## References
-
-- The [Remixml website](http://remixml.org/) uses the smallest and
-  fastest [lockandload AMD-loader](https://www.npmjs.com/package/lockandload).
-
