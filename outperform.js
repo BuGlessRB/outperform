@@ -97,6 +97,12 @@
     field: function(form, fld)
       { var opt = fld[3] = fld[3] || {}, k, i, t, iel,
          v = { name:fld[0], type:fld[1] };
+        function reportvalidity(el)
+        { el = el.currentTarget;
+          if (opt.validate)
+            el.setCustomValidity(opt.validate(form.elements) || "");
+          el.reportValidity();
+        }
         O.assign(v, opt);
         k = (opt.template = txt2node(opt.template || template)).cloneNode(1);
         k.querySelector(opt.labelsel || labelsel).textContent = fld[2];
@@ -104,12 +110,8 @@
         delete v.validate; delete v.persist; delete v.template;
         for (t = k.querySelectorAll(inputs), i = 0; i < t.length; i++)
         { addattr(iel = t[i], v);
-          iel.addEventListener("change", function(el)
-          { el = el.currentTarget;
-            if (opt.validate)
-              el.setCustomValidity(opt.validate(form.elements) || "");
-            el.reportValidity();
-          });
+          iel.addEventListener("change", reportvalidity);
+          iel.addEventListener("input", reportvalidity);
           iel.opfpersist = opt.persist !== undefined ? opt.persist :
            v.type == "password" ? 0 : 1;
           iel.opferror = k.querySelector(opt.errsel || errsel);
