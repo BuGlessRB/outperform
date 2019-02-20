@@ -59,7 +59,10 @@ It runs inside any webbrowser environment (starting at IE11 and up).
  ];
  var form = Outperform.create("form", {id:"hello"}, fields);
  document.body.appendChild(form);
- console.log(JSON.stringify(Outperform.getfields(form)));
+
+ // on submit:
+ if (form.reportValidity())
+   console.log(JSON.stringify(Outperform.getfields(form)));
 ```
 
 ## Reference documentation

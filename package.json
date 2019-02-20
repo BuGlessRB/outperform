@@ -1,6 +1,6 @@
 {
   "name": "outperform",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "description": "Form generator using plain javascript",
   "main": "outperform.js",
   "browser": "outperform.js",
@@ -14,7 +14,8 @@
     "type": "git", "url": "git://github.com/BuGlessRB/outperform"
   },
   "keywords": [
-    "HTML", "template", "form", "form-generator"
+    "HTML", "template", "form", "form-generator", "validation",
+    "validator", "persistence"
   ],
   "author": "Stephen R. van den Berg <srb@cuci.nl>",
   "license": "(ISC OR GPL-3.0)"
