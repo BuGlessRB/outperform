@@ -87,13 +87,14 @@
 	  nm = el.name;
 	  if (persist && !el.opfpersist)
 	    continue;
+	  t = vals[nm] || "";
 	  switch(el.type)
 	  { case "checkbox":
 	    case "radio":
-	      el.checked = isa(t = vals[nm]) && t.indexOf(el.value) >= 0
+	      el.checked = isa(t) && t.indexOf(el.value) >= 0
 	       || t === el.value;
 	      break;
-	    default: el.value = vals[nm];
+	    default: el.value = t;
 	  }
 	}
       },
