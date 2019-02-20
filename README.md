@@ -61,8 +61,10 @@ It runs inside any webbrowser environment (starting at IE11 and up).
  document.body.appendChild(form);
 
  // on submit:
- if (form.reportValidity())
+ if (form.reportValidity()) {
    console.log(JSON.stringify(Outperform.getfields(form)));
+   Outperform.clearpersist(form);
+ }
 ```
 
 ## Reference documentation
@@ -105,8 +107,8 @@ Fielddescriptions are an array of values:
   - `list`<br />
     An array of values for a `select`, `checkbox` or `radio` element.
     Every entry needs to satisfy the following rules:
-    - `select` values should contain one or two strings followed by
-      an optional option object per row.
+    - `select` values should contain one or two strings (separate value
+      is optional) followed by an optional option object per row.
     - `checkbox` and `radio` values should contain a single string,
      or a single string followed by an option object, or a full
      fielddescription array.
@@ -138,6 +140,8 @@ Exposed API-list:
   (Pre)sets all values in the form using the object in `values`.
 - `Outperform.field(form, fielddescription)`<br />
    Return a single node that is equivalent to the provided `fielddescription`
-   (used internally by `Outperform.create()`).
+   (used internally by `Outperform.create()`).  This method can be used
+   to construct completely custom form elements, by inserting them
+   manually into the form created by `Outperform.create()`.
 
 ## References
