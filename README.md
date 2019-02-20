@@ -20,13 +20,19 @@ It runs inside any webbrowser environment (starting at IE11 and up).
   all browsers.
 - Convenience functions to easily retrieve and (pre)set all form data using
   javascript objects (ideal for custom processing of form submissions).
+- Does not invade or mess up your `id` DOM-namespace by using form-relative
+  `name` references internally exclusively.
 
 ## Basic usage
 
 ```js
  var fields = [
    [ "houseno", "number", "This is the description", {min:1, max:999}],
-   [ "foo", "text", "This is the description"],
+   [ "foo", "text", "This is the description",
+      {validate:function(flds) {
+        if (flds.foo.value != flds.foo2.value)
+          return "Mismatch between foo en foo2 fields";
+       }],
    [ "foo2", "password", "This is the description"],
    [ "bar", "select", "This is the description",
      {list:
@@ -34,17 +40,20 @@ It runs inside any webbrowser environment (starting at IE11 and up).
        ["two", {class:"bright"}],
        ["three", "Three choices"],
        "four",
-       ["five", "Five", {style:"display:none;"}]
+       ["five", "Five", {style:"display:none;"}],
       ]
      }
    ],
    [ "bar2", "checkbox", "This is the description",
      {list:
       ["one",
-      ["two", {class:"bright", value:"2"}],
-      ["Three choices"],
-      "four",
-      ["Five", {style:"display:none;", value:"5"}]]
+       ["two", {class:"bright", value:"2"}],
+       ["Three choices"],
+       "four",
+       ["Five", {style:"display:none;", value:"5"}],
+      ],
+      template:"<fieldset><legend></legend><input /></fieldset>",
+      labelsel:"legend",
      }
    ],
  ];
@@ -54,6 +63,50 @@ It runs inside any webbrowser environment (starting at IE11 and up).
 ```
 
 ## Reference documentation
+
+Fielddescriptions are an array of values:
+```js
+ [ name, type, description, options]
+```
+- `name`<br />
+  Is the name attribute for this input field.
+- `type`<br />
+  Is the type attribute for this input field.  All browser native types
+  are supported.  Special values are `select` or `textarea`, which generate
+  corresponding input fields.
+- `description`<br />
+  Should be the human readable description of this field.
+- `options`<br />
+  Is an optional field that can contain an object.  All values in this
+  object will become attributes on the input field.
+  Exception to this rule are a few special attributes:
+  - `template`<br />
+    Defaults to:
+     ```html
+      <label><span class=\"label\"></span><input /></label>
+     ```
+     And can be specified per input field if so desired.
+  - `labelsel`<br />
+    Defaults to: `.label`
+    And identifies the element whose content shall be replaced
+    by the human readable form of the description of the input field.
+  - `persist`<br />
+    A boolean which determines if this field's content will persist
+    accross browser reloads.  Defaults to `true` for all types except
+    `password`.
+  - `validate`<br />
+    Can be defined to a function which performs custom validation
+    checks.  The function receives a single parameter which can be
+    indexed by the name of an input element to reference the input element
+    nodes.
+  - `list`<br />
+    An array of values for a `select`, `checkbox` or `radio` element.
+    Every entry needs to satisfy the following rules:
+    - `select` values should contain one or two strings followed by
+      an optional option object per row.
+    - `checkbox` and `radio` values should contain a single string,
+     or a single string followed by an option object, or a full
+     fielddescription array.
 
 ### API
 
