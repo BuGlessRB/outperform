@@ -83,12 +83,12 @@ Fielddescriptions are an array of values:
   - `template`<br />
     Defaults to:
      ```html
-      <label><span class=\"label\"></span><input /></label>
+      <label><span></span><input /></label>
      ```
      And can be specified per input field if so desired.
   - `labelsel`<br />
-    Defaults to: `.label`
-    And identifies the element whose content shall be replaced
+    Defaults to: `span`
+    And identifies the first element whose content shall be replaced
     by the human readable form of the description of the input field.
   - `persist`<br />
     A boolean which determines if this field's content will persist

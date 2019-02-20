@@ -5,9 +5,8 @@
 
 !function(W, D, O)
 { "use strict";
-  var diva = newel("div"), labelsel = ".label",
-   template = txt2node("<label><span class=\"label\"></span>"
-    + "<input /></label>"),
+  var diva = newel("div"), labelsel = "span",
+   template = txt2node("<label><span></span><input /></label>"),
    inputs = "input,select,textarea";
   function isstring(s)
   { return O.prototype.toString.call(s) === "[object String]"; }
