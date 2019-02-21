@@ -52,6 +52,15 @@
       },
     getvalues: function(form, persist)
       { var i, el, nm, t, els = form.elements, res = {};
+	function storeit()
+	{ if ((t = res[nm]) === undefined)
+	    res[nm] = el.value;
+	  else
+	  { if (!isa(t))
+	      res[nm] = [t];
+	    res[nm].push(el.value);
+	  }
+	}
 	for (i = 0; i < els.length;)
 	{ switch((el = els[i++]).tagName)
 	  { default: continue;
@@ -64,21 +73,19 @@
 	  { case "checkbox":
 	    case "radio":
 	      if (el.checked)
-		if ((t = res[nm]) === undefined)
-		  res[nm] = el.value;
-		else
-		{ if (!isa(t))
-		    res[nm] = [t];
-		  res[nm].push(el.value);
-		}
+		storeit();
 	      break;
-	    default: res[nm] = el.value;
+	    default:
+	      storeit();
 	  }
 	}
 	return res;
       },
-    setvalues: function(form, vals, persist)
-      { var i, el, nm, t, els = form.elements;
+    setvalues: function(form, t, persist)
+      { var i, el, vals, nm, els = form.elements;
+	vals = {};
+	for (i in t)
+	  vals[i] = isa(nm = t[i]) ? nm.slice() : [nm];
 	for (i = 0; i < els.length;)
 	{ switch((el = els[i++]).tagName)
 	  { default: continue;
@@ -87,14 +94,14 @@
 	  nm = el.name;
 	  if (persist && !el.opfpersist)
 	    continue;
-	  t = vals[nm] || "";
+	  t = vals[nm] || [];
 	  switch(el.type)
 	  { case "checkbox":
 	    case "radio":
-	      el.checked = isa(t) && t.indexOf(el.value) >= 0
-	       || t === el.value;
+	      if (el.checked = t[0] === el.value)
+		t.shift();
 	      break;
-	    default: el.value = t;
+	    default: el.value = t.shift() || "";
 	  }
 	}
       },
