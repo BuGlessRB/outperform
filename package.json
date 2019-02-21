@@ -1,6 +1,6 @@
 {
   "name": "outperform",
-  "version": "1.0.38",
+  "version": "1.0.39",
   "description": "Form generator using plain javascript",
   "main": "outperform.js",
   "browser": "outperform.js",

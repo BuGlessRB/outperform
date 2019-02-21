@@ -73,7 +73,10 @@
 	  { case "checkbox":
 	    case "radio":
 	      if (el.checked)
+	      {	if (el.value === undefined)
+		  el.value = "on";
 		storeit();
+	      }
 	      break;
 	    default:
 	      storeit();
