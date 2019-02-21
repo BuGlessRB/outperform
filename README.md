@@ -3,7 +3,8 @@
 Outperform is a form generator written in plain Javascript with zero
 dependencies.
 It supports and augments browser native form validation and offers automatic
-persistence of half-filled forms across page reloads.
+persistence of half-filled forms across page reloads while integrating
+with any and all web frameworks.
 
 ## Requirements
 
@@ -13,9 +14,11 @@ It runs inside any webbrowser environment (starting at IE11 and up).
 
 - Zero dependencies.
 - Less filling (unminified but gzipped: <2KB).
-- Native browser form validation support.
+- Native browser form validation support for all HTML5+ input types.
 - Custom validation seemlessly integrated.
 - Compact form description format.
+- Customisable nested HTML templates that allow
+  seemless integration with any web framework (e.g. Bootstrap).
 - Automatic and consistent persistence of forms across page reloads in
   all browsers.
 - Convenience functions to easily retrieve and (pre)set all form data using
