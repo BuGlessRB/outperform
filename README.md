@@ -149,3 +149,5 @@ Exposed API-list:
    manually into the form created by `Outperform.create()`.
 
 ## References
+
+Card-carrying member of the `zerodeps` movement.
