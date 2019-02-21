@@ -1,6 +1,6 @@
 {
   "name": "outperform",
-  "version": "1.0.35",
+  "version": "1.0.36",
   "description": "Form generator using plain javascript",
   "main": "outperform.js",
   "browser": "outperform.js",
@@ -15,7 +15,7 @@
   },
   "keywords": [
     "HTML", "template", "form", "form-generator", "validation",
-    "validator", "persistence", "HTML5", "native"
+    "validator", "persistence", "HTML5", "native", "zerodeps"
   ],
   "author": "Stephen R. van den Berg <srb@cuci.nl>",
   "license": "(ISC OR GPL-3.0)"

@@ -114,7 +114,8 @@ Fielddescriptions are an array of values:
       is optional) followed by an optional option object per row.
     - `checkbox` and `radio` values should contain a single string,
      or a single string followed by an option object, or a full
-     fielddescription array.
+     fielddescription array (the latter can be used to recursively
+     nest arbitrarily complex HTML structures in the form).
 
 ### API
 
