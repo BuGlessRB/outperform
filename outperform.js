@@ -73,7 +73,7 @@
 	  { case "checkbox":
 	    case "radio":
 	      if (el.checked)
-	      {	if (el.value === undefined)
+	      { if (el.value === undefined)
 		  el.value = "on";
 		storeit();
 	      }
@@ -127,8 +127,8 @@
 	    if (v.value === undefined)
 	      v.value = fld[2];
 	}
-	for (t = k.querySelectorAll(inputs), i = 0; i < t.length; i++)
-	{ iel = t[i];
+	for (t = k.querySelectorAll(inputs), i = 0; i < t.length;)
+	{ iel = t[i++];
 	  switch (v.type)
 	  { case "checkbox": case "radio":
 	      if (li = opt.list)
@@ -166,8 +166,11 @@
 	      iel.appendChild(le);
 	    }
 	  }
-          opt.node && opt.node(iel, k);
+	  if (opt.node)
+	    opt.node(iel, k);
 	}
+	if (!i && opt.node)
+	  opt.node(0, k);
 	return k;
       }
   };
