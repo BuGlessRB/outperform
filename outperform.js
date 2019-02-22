@@ -108,6 +108,15 @@
 	  }
 	}
       },
+    obj2formdata: function(vals)
+      { var i, j, k, fd = new FormData();
+	for (i in vals)
+          if (isa(j = vals[i]))
+            for (k = 0; k < j.length; fd.append(i, j[k++]));
+          else
+            fd.set(i, j);
+        return fd;
+      }
     field: function(form, fld)
       { var opt = fld[3] = fld[3] || {}, k, i, j, m, t, r, li, le, iel,
 	 v = { name:fld[0], type:fld[1] };

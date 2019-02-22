@@ -148,6 +148,8 @@ Exposed API-list:
   Returns an object containing all entered values in the form.
 - `Outperform.setvalues(form, values)`<br />
   (Pre)sets all values in the form using the object in `values`.
+- `Outperform.obj2formdata(values)`<br />
+  Returns the equivalent `formData` object.
 - `Outperform.field(form, fielddescription)`<br />
    Return a single node that is equivalent to the provided `fielddescription`
    (used internally by `Outperform.create()`).  This method can be used
