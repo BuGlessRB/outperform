@@ -107,6 +107,12 @@ Fielddescriptions are an array of values:
     checks.  The function receives a single parameter which can be
     indexed by the name of an input element to reference the input element
     nodes.
+  - `node`<br />
+    Can be defined to a function which is run once right after the template
+    has been fully instantiated.
+    The first parameter is a reference to the input element node itself, and
+    the second parameter is a reference to the top element node in this
+    templaterow.
   - `list`<br />
     An array of values for a `select`, `checkbox` or `radio` element.
     Every entry needs to satisfy the following rules:

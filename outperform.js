@@ -118,9 +118,9 @@
 	  el.reportValidity();
 	}
 	O.assign(v, opt);
-	k = (opt.template = txt2node(opt.template || template)).cloneNode(1);
-	k.querySelector(opt.labelsel || labelsel).textContent = fld[2];
-	delete v.labelsel;delete v.list;
+	k = (opt.template = txt2node(v.template || template)).cloneNode(1);
+	k.querySelector(v.labelsel || labelsel).textContent = fld[2];
+	delete v.labelsel;delete v.list; delete v.node;
 	delete v.validate; delete v.persist; delete v.template;
 	switch (v.type)
 	{ case "checkbox": case "radio":
@@ -166,6 +166,7 @@
 	      iel.appendChild(le);
 	    }
 	  }
+          opt.node && opt.node(iel, k);
 	}
 	return k;
       }
