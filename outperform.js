@@ -116,7 +116,7 @@
           else
             fd.set(i, j);
         return fd;
-      }
+      },
     field: function(form, fld)
       { var opt = fld[3] = fld[3] || {}, k, i, j, m, t, r, li, le, iel,
 	 v = { name:fld[0], type:fld[1] };
