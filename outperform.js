@@ -186,9 +186,9 @@
 
   if (typeof define == "function" && define.amd)
     define("outperform", [], g);
-  else if (W.exports)
-    W.exports.outperform = g, W.exports.document = D;
+  else if (W["exports"])
+    W["exports"]["outperform"] = g, W["exports"]["document"] = D;
   else
-    W.Outperform = g;
+    W["Outperform"] = g;
 })(typeof window == "object" ? window : global,
   typeof document == "object" ? document : require("minidom")(''), Object);
