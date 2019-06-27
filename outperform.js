@@ -3,7 +3,7 @@
  // License: ISC OR GPL-3.0
 // Sponsored by: Cubic Circle, The Netherlands
 
-!function(W, D, O)
+(function(W, D, O)
 { "use strict";
   var diva = newel("div"), labelsel = "span",
    template = txt2node("<label><span></span><input /></label>"),
@@ -112,7 +112,7 @@
       { var i, j, k, fd = new FormData();
 	for (i in vals)
           if (isa(j = vals[i]))
-            for (k = 0; k < j.length; fd.append(i, j[k++]));
+            for (k = 0; k < j.length; fd.append(i, j[k++])) {}
           else
             fd.set(i, j);
         return fd;
@@ -190,5 +190,5 @@
     W.exports.outperform = g, W.exports.document = D;
   else
     W.Outperform = g;
-}(typeof window == "object" ? window : global,
+})(typeof window == "object" ? window : global,
   typeof document == "object" ? document : require("minidom")(''), Object);
