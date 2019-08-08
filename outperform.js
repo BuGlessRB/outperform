@@ -1,5 +1,5 @@
    /** @license
-   ** outperform v1.0: Form generator in plain javascript.
+   ** outperform v1.1.1: Form generator in plain javascript.
   ** Copyright (c) 2019 by Stephen R. van den Berg <srb@cuci.nl>
  ** License: ISC OR GPL-3.0
 ** Sponsored by: Cubic Circle, The Netherlands
@@ -9,29 +9,40 @@
   var diva = newel("div"), labelsel = "span",
    template = txt2node("<label><span></span><input /></label>"),
    inputs = "input,select,textarea";
-  function isstring(s)
+
+  function /** !boolean */ isstring(/** * */ s)
   { return O.prototype.toString.call(s) === "[object String]"; }
 
-  function isa(s) { return Array.isArray(s); }
-  function sattr(n, k, v) { n.setAttribute(k, v); }
-  function addattr(el, a) { for (var i in a) sattr(el, i, a[i]); }
-  function replelm(n, o) { return o.parentNode.replaceChild(n, o); }
+  function /** !boolean */ isa(/** * */ s) { return Array.isArray(s); }
+
+  function sattr(/** !Node */ n, /** !string */ k, /** string */ v)
+  { n.setAttribute(k, v);
+  }
+
+  function addattr(/** !Node */ el, /** Object|undefined */ a)
+  { for (var i in a)
+      sattr(el, i, a[i]);
+  }
+
+  function /** !Node */ replelm(/** !Node */ n, /** !Node */ o)
+  { return o.parentNode.replaceChild(n, o);
+  }
 
   function /** !Node */ newel(/** !string */ n, /** Object= */ a)
   { addattr(n = D.createElement(n), a); return n;
   }
 
-  function txt2node(t)
-  { return t.nodeType ? t :
+  function /** !Node */ txt2node(/** string|Node */ t)
+  { return t.nodeType ? /** @type {!Node} */ (t) :
      (diva.innerHTML = t, (t = D.createRange()).selectNodeContents(diva),
       t.extractContents());
   }
 
-  function storeform(form)
+  function storeform(/** !Object */ form)
   { form = form.currentTarget;
     try
     { sessionStorage.setItem("form#" + form.id,
-       JSON.stringify(g.getvalues(form, 1)));
+       JSON.stringify(g["getvalues"](form, 1)));
     } catch(e) {}
   }
 
@@ -43,11 +54,11 @@
   { "create": function(form, attr, fields)
       { form = newel(form, attr);
 	for (attr = 0; attr < fields.length; attr++)
-	  form.appendChild(g.field(form, fields[attr]));
+	  form.appendChild(g["field"](form, fields[attr]));
 	form.addEventListener("change", storeform);
 	try
 	{ if (fields = sessionStorage.getItem("form#" + form.id))
-	    g.setvalues(form, JSON.parse(fields), 1);
+	    g["setvalues"](form, JSON.parse(fields), 1);
 	} catch(e) {}
 	return form;
       },
@@ -131,7 +142,8 @@
 	  el.reportValidity();
 	}
 	O.assign(v, opt);
-	k = (opt["template"] = txt2node(v["template"] || template)).cloneNode(1);
+	k = (opt["template"] = txt2node(v["template"] || template))
+	 .cloneNode(true);
 	k.querySelector(v["labelsel"] || labelsel).textContent = fld[2];
 	delete v["labelsel"];delete v["list"]; delete v["node"];
 	delete v["validate"]; delete v["persist"]; delete v["template"];
@@ -151,7 +163,7 @@
 		    m = [m];
 		  if (m.length < 3)
 		    (m = m.slice()).unshift(fld[0], fld[1]);
-		  le.insertBefore(g.field(form, m), iel);
+		  le.insertBefore(g["field"](form, m), iel);
 		}
 		le.removeChild(iel);
 		continue;
