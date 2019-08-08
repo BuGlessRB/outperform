@@ -1,8 +1,9 @@
-   // outperform v1.0: Form generator in plain javascript.
-  // Copyright (c) 2019 by Stephen R. van den Berg <srb@cuci.nl>
- // License: ISC OR GPL-3.0
-// Sponsored by: Cubic Circle, The Netherlands
-
+   /** @license
+   ** outperform v1.0: Form generator in plain javascript.
+  ** Copyright (c) 2019 by Stephen R. van den Berg <srb@cuci.nl>
+ ** License: ISC OR GPL-3.0
+** Sponsored by: Cubic Circle, The Netherlands
+*/
 (function(W, D, O)
 { "use strict";
   var diva = newel("div"), labelsel = "span",
@@ -15,7 +16,10 @@
   function sattr(n, k, v) { n.setAttribute(k, v); }
   function addattr(el, a) { for (var i in a) sattr(el, i, a[i]); }
   function replelm(n, o) { return o.parentNode.replaceChild(n, o); }
-  function newel(n, a) { addattr(n = D.createElement(n), a); return n; }
+
+  function /** !Node */ newel(/** !string */ n, /** Object= */ a)
+  { addattr(n = D.createElement(n), a); return n;
+  }
 
   function txt2node(t)
   { return t.nodeType ? t :
@@ -33,10 +37,10 @@
 
   if (!O.assign)
     O.defineProperty(O, "assign",
-    { value: function(d, s, i) { for (i in s) d[i] = s[i]; return d; } });
+    { "value": function(d, s, i) { for (i in s) d[i] = s[i]; return d; } });
 
   var g =
-  { create: function(form, attr, fields)
+  { "create": function(form, attr, fields)
       { form = newel(form, attr);
 	for (attr = 0; attr < fields.length; attr++)
 	  form.appendChild(g.field(form, fields[attr]));
@@ -47,10 +51,10 @@
 	} catch(e) {}
 	return form;
       },
-    clearpersist: function(form)
+    "clearpersist": function(form)
       { try { sessionStorage.removeItem("form#" + form.id); } catch(e) {}
       },
-    getvalues: function(form, persist)
+    "getvalues": function(form, persist)
       { var i, el, nm, t, els = form.elements, res = {};
 	function storeit()
 	{ if ((t = res[nm]) === undefined)
@@ -84,7 +88,7 @@
 	}
 	return res;
       },
-    setvalues: function(form, t, persist)
+    "setvalues": function(form, t, persist)
       { var i, el, vals, nm, els = form.elements;
 	vals = {};
 	for (i in t)
@@ -108,7 +112,7 @@
 	  }
 	}
       },
-    obj2formdata: function(vals)
+    "obj2formdata": function(vals)
       { var i, j, k, fd = new FormData();
 	for (i in vals)
           if (isa(j = vals[i]))
@@ -117,30 +121,30 @@
             fd.set(i, j);
         return fd;
       },
-    field: function(form, fld)
+    "field": function(form, fld)
       { var opt = fld[3] = fld[3] || {}, k, i, j, m, t, r, li, le, iel,
-	 v = { name:fld[0], type:fld[1] };
+	 v = { "name":fld[0], "type":fld[1] };
 	function reportvalidity(el)
 	{ el = el.currentTarget;
-	  if (opt.validate)
-	    el.setCustomValidity(opt.validate(form.elements) || "");
+	  if (opt["validate"])
+	    el.setCustomValidity(opt["validate"](form.elements) || "");
 	  el.reportValidity();
 	}
 	O.assign(v, opt);
-	k = (opt.template = txt2node(v.template || template)).cloneNode(1);
-	k.querySelector(v.labelsel || labelsel).textContent = fld[2];
-	delete v.labelsel;delete v.list; delete v.node;
-	delete v.validate; delete v.persist; delete v.template;
-	switch (v.type)
+	k = (opt["template"] = txt2node(v["template"] || template)).cloneNode(1);
+	k.querySelector(v["labelsel"] || labelsel).textContent = fld[2];
+	delete v["labelsel"];delete v["list"]; delete v["node"];
+	delete v["validate"]; delete v["persist"]; delete v["template"];
+	switch (v["type"])
 	{ case "checkbox": case "radio":
-	    if (v.value === undefined)
-	      v.value = fld[2];
+	    if (v["value"] === undefined)
+	      v["value"] = fld[2];
 	}
 	for (t = k.querySelectorAll(inputs), i = 0; i < t.length;)
 	{ iel = t[i++];
-	  switch (v.type)
+	  switch (v["type"])
 	  { case "checkbox": case "radio":
-	      if (li = opt.list)
+	      if (li = opt["list"])
 	      { le = iel.parentNode;
 		for (j = 0; j < li.length;)
 		{ if (!isa(m = li[j++]))
@@ -154,15 +158,15 @@
 	      }
 	      break;
 	    case "select": case "textarea":
-	      replelm(m = newel(v.type), iel); iel = m;
+	      replelm(m = newel(v["type"]), iel); iel = m;
 	  }
 	  addattr(iel, v);
 	  iel.addEventListener("change", reportvalidity);
 	  iel.addEventListener("input", reportvalidity);
-	  iel.opfpersist = opt.persist !== undefined ? opt.persist :
-	   v.type == "password" ? 0 : 1;
-	  if (v.type == "select")
-	  { li = opt.list || [];
+	  iel.opfpersist = opt["persist"] !== undefined ? opt["persist"] :
+	   v["type"] == "password" ? 0 : 1;
+	  if (v["type"] == "select")
+	  { li = opt["list"] || [];
 	    for (j = 0; j < li.length;)
 	    { if (!isa(r = li[j++]))
 		r = [r];
@@ -175,16 +179,16 @@
 	      iel.appendChild(le);
 	    }
 	  }
-	  if (opt.node)
-	    opt.node(iel, k);
+	  if (opt["node"])
+	    opt["node"](iel, k);
 	}
-	if (!i && opt.node)
-	  opt.node(0, k);
+	if (!i && opt["node"])
+	  opt["node"](0, k);
 	return k;
       }
   };
 
-  if (typeof define == "function" && define.amd)
+  if (typeof define == "function" && define["amd"])
     define("outperform", [], g);
   else if (W["exports"])
     W["exports"]["outperform"] = g, W["exports"]["document"] = D;
