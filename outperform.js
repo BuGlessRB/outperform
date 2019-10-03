@@ -1,9 +1,12 @@
    /** @license
-   ** outperform v1.1.1: Form generator in plain javascript.
+   ** outperform v1.1.3: Form generator in plain javascript.
   ** Copyright (c) 2019 by Stephen R. van den Berg <srb@cuci.nl>
  ** License: ISC OR GPL-3.0
 ** Sponsored by: Cubic Circle, The Netherlands
 */
+
+/** @define {number} */ var DEBUG = 0;
+
 (function(W, D, O)
 { "use strict";
   var diva = newel("div"), labelsel = "span",
