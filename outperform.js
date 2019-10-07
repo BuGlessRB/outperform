@@ -51,7 +51,13 @@
 
   if (!O.assign)
     O.defineProperty(O, "assign",
-    { "value": function(d, s, i) { for (i in s) d[i] = s[i]; return d; } });
+    { "value": function(d, s, i)
+      { if (s)
+	  for (i in s)
+	    d[i] = s[i];
+	return d;
+      }
+    });
 
   var g =
   { "create": function(form, attr, fields)
