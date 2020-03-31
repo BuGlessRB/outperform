@@ -6,6 +6,7 @@
 */
 
 /** @define {number} */ var DEBUG = 0;
+/** @define {number} */ var ALERTS = 0;
 
 (function(W, D, O)
 { "use strict";
