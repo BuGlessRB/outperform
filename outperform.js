@@ -34,13 +34,15 @@
   }
 
   function /** !Node */ newel(/** !string */ n, /** Object= */ a)
-  { addattr(n = D.createElement(n), a); return n;
+  { var /** !Node */ node;
+    addattr(node = D.createElement(n), a); return node;
   }
 
-  function /** !Node */ txt2node(/** string|Node */ t)
-  { return t.nodeType ? /** @type {!Node} */ (t) :
-     (diva.innerHTML = t, (t = D.createRange()).selectNodeContents(diva),
-      t.extractContents());
+  function /** !Node */ txt2node(/** string|!Node */ t)
+  { var /** !Range */ range;
+    return t.nodeType ? /** @type {!Node} */ (t) :
+     (diva.innerHTML = t, (range = D.createRange()).selectNodeContents(diva),
+      range.extractContents());
   }
 
   function storeform(/** !Object */ form)
