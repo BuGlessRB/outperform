@@ -61,7 +61,7 @@
       }
     });
 
-  var g =
+  const /** !Object */ g =
   { "create": function(form, attr, fields)
       { form = newel(form, attr);
 	for (attr = 0; attr < fields.length; attr++)
@@ -213,9 +213,8 @@
 
   if (typeof define == "function" && define["amd"])
     define("outperform", [], g);
-  else if (W["exports"])
-    W["exports"]["outperform"] = g, W["exports"]["document"] = D;
+  else if (typeof exports == "object")
+    O.assign(/** @type{!Object} */(exports), g);
   else
     W["Outperform"] = g;
-})(typeof window == "object" ? window : global,
-  typeof document == "object" ? document : require("minidom")(''), Object);
+})(window, document, Object);
