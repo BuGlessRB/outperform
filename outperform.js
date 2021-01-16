@@ -39,10 +39,10 @@
   }
 
   function /** !Node */ txt2node(/** string|!Node */ t)
-  { var /** !Range */ range;
+  { var /** Range */ range;
     return t.nodeType ? /** @type {!Node} */ (t) :
      (diva.innerHTML = t, (range = D.createRange()).selectNodeContents(diva),
-      range.extractContents());
+      /** @type {!Node} */ (range.extractContents()));
   }
 
   function storeform(/** !Object */ form)
