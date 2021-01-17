@@ -35,7 +35,7 @@ It runs inside any webbrowser environment (starting at IE11 and up).
       {validate:function(flds) {
         if (flds.foo.value != flds.foo2.value)
           return "Mismatch between foo en foo2 fields";
-       }],
+       }}],
    [ "foo2", "password", "This is the description"],
    [ "bar", "select", "This is the description",
      {list:
